@@ -11,7 +11,7 @@ TextureImporter:
     21300012: walk3
     21300014: walk4
     21300016: walk7
-    21300018: All_9
+    21300018: walk8
     21300020: Idle
     21300022: JumpDown2
     21300024: All_12
@@ -303,7 +303,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: All_9
+      name: walk8
       rect:
         serializedVersion: 2
         x: 512
@@ -446,12 +446,12 @@ TextureImporter:
       name: Walk9
       rect:
         serializedVersion: 2
-        x: 7
+        x: 9
         y: 2
         width: 512
         height: 512
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
