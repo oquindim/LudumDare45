@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class Player : MonoBehaviour {
@@ -13,6 +14,8 @@ public class Player : MonoBehaviour {
 
 	public PlayerStats playerStats = new PlayerStats();
 	public float fallBoundary = -20f;
+	public Text weightText;
+	public Text gravityText;
 	public GameObject jabuContainer;
 	private int jabuTotal;
 	public GameObject portal;
@@ -31,10 +34,14 @@ public class Player : MonoBehaviour {
 			playerStats.hp = dplayer.getWeight();
 			PlayerPrefs.SetFloat("weight", playerStats.hp);
 		}
+		updateWeightText();
 		playerStats.gravity = dplayer.getGravity();
-		Debug.Log(PlayerPrefs.GetFloat("weight"));
-	}
+		gravityText.text = "Gravity: " + playerStats.gravity.ToString ();
 
+	}
+	void updateWeightText() {
+		weightText.text = "Weight: " + playerStats.hp.ToString ();
+	}
 	void Update()
 	{
 		if(transform.position.y <= fallBoundary)
@@ -52,6 +59,7 @@ public class Player : MonoBehaviour {
 	void UpdateWeight(float val) {
 		dplayer.setWeight(playerStats.hp + val);
 		PlayerPrefs.SetFloat("weight",playerStats.hp + val);
+		updateWeightText();
 	}
 	private void OnTriggerEnter2D (Collider2D other)
     {
