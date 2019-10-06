@@ -20,6 +20,9 @@ public class PlatformerCharacter2D : MonoBehaviour
 	float ceilingRadius = .01f;							// Radius of the overlap circle to determine if the player can stand up
 	Animator anim;										// Reference to the player's animator component.
 
+	float gravity;
+
+	float weight;
 	Transform playerGraphics;							// Reference to the graphics so we can change direction
 
     void Awake()
@@ -29,7 +32,8 @@ public class PlatformerCharacter2D : MonoBehaviour
 		ceilingCheck = transform.Find("CeilingCheck");
 		anim = GetComponent<Animator>();
 		playerGraphics = transform.Find("Graphics");
-
+		gravity = GetComponent<Rigidbody2D>().gravityScale;
+		weight = GetComponent<Rigidbody2D>().mass;
 		if(playerGraphics == null)
 			Debug.LogError ("Graphics not found!");
 	}
@@ -45,10 +49,19 @@ public class PlatformerCharacter2D : MonoBehaviour
 		anim.SetFloat("vSpeed", GetComponent<Rigidbody2D>().velocity.y);
 	}
 
+	public  float getGravity() {
+		return gravity;
+	}
+	public  float getWeight() {
+		return weight;
+	}
+	public void setWeight(float val) {
+		weight  =  val;
+		GetComponent<Rigidbody2D>().mass = weight;
+	}
 
 	public void Move(float move, bool crouch, bool jump)
 	{
-
 
 		// If crouching, check to see if the character can stand up
 		if(!crouch && anim.GetBool("Crouch"))
@@ -57,7 +70,6 @@ public class PlatformerCharacter2D : MonoBehaviour
 			if( Physics2D.OverlapCircle(ceilingCheck.position, ceilingRadius, whatIsGround))
 				crouch = true;
 		}
-
 		// Set whether or not the character is crouching in the animator
 		anim.SetBool("Crouch", crouch);
 
